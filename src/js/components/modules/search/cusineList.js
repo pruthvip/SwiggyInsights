@@ -50,7 +50,7 @@ export default class CusineList extends Component {
                 </div>
                 <ul className="cusine-items">
                     {
-                        cuisineList && cuisineList.map((cusine, index) => {
+                        this.props.cuisineList && this.props.cuisineList.map((cusine, index) => {
                             return (
                                 <li className="cusine-items__item">
                                     {cusine.name}
