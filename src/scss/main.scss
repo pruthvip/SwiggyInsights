@@ -16,9 +16,12 @@
 @import './components/login';
 @import './components/aside';
 @import './components/header';
+@import './components/searchBar';
 
 // Pages
-//
+
+@import './pages/app';
+@import './pages/page-search';
 
 
 // Footer

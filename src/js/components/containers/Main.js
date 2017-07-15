@@ -30,6 +30,8 @@ export default class Main extends Component {
             sideNav = null;
         }
 
+        sideNav = null;
+
         return (
             <div className="app">
               <div className="columns">

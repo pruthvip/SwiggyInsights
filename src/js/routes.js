@@ -1,5 +1,5 @@
 import {Main} from './components/containers';
-import {RulesPage} from './components/containers/governance';
+import Search from './components/containers/Search';
 import {Login} from './components/modules/base';
 import { isLoggedIn } from './reducers/auth';
 
@@ -9,7 +9,6 @@ export default (store) => {
         if (isLoggedIn(store)) {
             callback();
         } else {
-            console.log('hey replacing');
              replace('/login');
         }
     };
@@ -20,21 +19,10 @@ export default (store) => {
             component: Main,
             childRoutes: [
                 {
-                    path: 'login',
-                    component: Login
-                },
-                {
-                    path: '/governance',
-                    onEnter: onEnter,
+                    path: '/search',
                     indexRoute: {
-                        component: RulesPage
-                    },
-                    childRoutes: [
-                        {
-                            path: 'rulesPage',
-                            component: RulesPage
-                        }
-                    ]
+                        component: Search
+                    }
                 }
             ]
         }

@@ -1,3 +1,10 @@
 .app-header {
-  height: $header-height;
+    height: $header-height;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 60px;
+    background-color: #fff;
+    width: 100%;
+    left: 0;
 }
