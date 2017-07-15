@@ -62,10 +62,13 @@ class Search extends Component {
                             changeCity={this.changeCity}
                             selectArea={this.selectArea}
                             selectCuisine={this.selectCuisine}
+                            resultApiStatus={this.props.resultApiStatus}
                         />
                     </div>
                     <div className="column is-two-thirds">
-                        <SearchResults />
+                        <SearchResults
+                            resultApiStatus={this.props.resultApiStatus}
+                        />
                     </div>
                 </div>
             </div>
@@ -86,7 +89,8 @@ export default connect(
             areaList: state.search.areaList,
             areaListApiStatus: state.search.areaListApiStatus,
             selectedAreaId: state.search.selectedAreaId,
-            selectedCuisineId: state.search.selectedCuisineId
+            selectedCuisineId: state.search.selectedCuisineId,
+            resultApiStatus: state.search.resultApiStatus
         };
     },
     (dispatch => ({

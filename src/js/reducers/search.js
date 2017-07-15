@@ -24,10 +24,13 @@ const initialState = {
     },
     resultApiStatus: {
         inProgress: false,
+        resultType: 0
         errors: []
     },
+    areaResults: null,
+    cuisineReults: null,
     cityList: [],
-    areaDetails: [],
+    areaDetails: {},
     areaList: [],
     selectedCityId: null,
     selectedAreaId: 0,
@@ -89,7 +92,8 @@ export default (state = initialState, action) => {
             const resultApiStatus = {
                 ...state.resultApiStatus,
                 inProgress: action.inProgress,
-                errors: action.errors
+                errors: action.errors,
+                resultType: action.resultType
             };
 
             return {

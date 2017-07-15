@@ -131,6 +131,23 @@ export function selectCuisine(selectedCuisineId) {
 }
 
 
+function _updateFetchResultsApi(inProgress, resultType, errors = null) {
+    return {
+        type: ActionConstants.UPDATE_RESULT_API_STATUS,
+        inProgress,
+        resultType,
+        errors
+    }
+}
+
+
+function _updateAreaWiseResults(areaDetails) {
+    return {
+        type: ActionConstants.UPDATE_AREA_DETAILS,
+        areaDetails
+    }
+}
+
 
 /**
  * Fetch the results
@@ -140,11 +157,27 @@ export function selectCuisine(selectedCuisineId) {
  * @return {[type]}           [description]
  */
 export function fetchResults(cityId, areaId, cuisineId) {
-    if (areaId) {
+    return (dispatch) => {
 
-    }
+        if (areaId) {
+            dispatch(_updateFetchResultsApi(true, 1));
 
-    if (cuisineId) {
+            const promiseArray = [];
 
+            promiseArray.push(SearchApi.fetchAreaDetails(areaId));
+            promiseArray.push(SearchApi.fetchAreaWiseResults(cityId, areaId));
+
+            return Promise.all(promiseArray)
+                .then(res => {
+                    dispatch(_updateFetchResultsApi(false));
+                    dispatch(_updateAreaWiseResults(res[1].data));
+                    dispatch(_updateAreaDetails(areaId, res[0].data));
+                })
+        }
+
+        if (cuisineId) {
+            dispatch(_updateFetchResultsApi(true, 2));
+
+        }
     }
 }

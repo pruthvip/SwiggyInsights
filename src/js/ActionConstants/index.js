@@ -12,5 +12,6 @@ export default keyMirror({
     'UPDATE_CUISINE_LIST': null,
     'UPDATE_SELECTED_AREA': null,
     'UPDATE_SELECTED_CUISINE': null,
-    'UPDATE_RESULT_API_STATUS': null
+    'UPDATE_RESULT_API_STATUS': null,
+    'UPDATE_AREA_DETAILS': null
 });
