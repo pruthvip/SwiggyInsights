@@ -1,0 +1,45 @@
+.search-results {
+    height: 600px;
+    position: relative;
+
+    .map {
+        width: 100%;
+        height: 100%;
+    }
+
+    .cusine-list {
+        margin:  0;
+        position: absolute;
+        top: 1.25rem;
+        bottom: 1.25rem;
+        right: 0;
+        width: 30%;
+        opacity: 1;
+        border-radius: 0;
+        border: none;
+
+        &__logo {
+            margin: 0 0 10px 0;
+            padding: 0 0 10px 0;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+
+            &__img {
+                width: 50px;
+            }
+        }
+    }
+
+
+    .cusine-items {
+        &__item {
+            padding: 10px;
+            border: 1px solid #eee;
+            border-bottom: 0;
+
+            &::last-of-type {
+                border-botom: 1px solid #eee;
+            }
+        }
+    }
+}

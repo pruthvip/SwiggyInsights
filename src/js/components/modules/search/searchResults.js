@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import GMap from './GMap';
+import CusineList from './cusineList';
 
 export default class SearchResults extends Component {
     constructor(props) {
@@ -7,7 +9,9 @@ export default class SearchResults extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="box search-results">
+                <GMap />
+                <CusineList />
             </div>
         );
     }

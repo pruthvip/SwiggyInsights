@@ -5,9 +5,30 @@ export default class SearchBar extends Component {
         super(props);
     }
 
+
+    renderCityDropDown() {
+        const cityListClassNames = ['select', 'is-success', 'w100'];
+
+        if (this.props.cityApiStatus.inProgress) {
+            cityListClassNames.push('is-loading');
+        }
+
+        return (
+            <span className={cityListClassNames.join(' ')}>
+              <select className="w100">
+                {this.props.cityList && this.props.cityList.map((city, i) => {
+                    return (
+                        <option key={i}>{city.value}</option>
+                    )
+                })}
+              </select>
+            </span>
+        );
+    }
+
     render() {
         return (
-            <div className="container">
+            <div className="box">
                 <div className="card search-bar">
                   <header className="card-header">
                     <p className="card-header-title">
@@ -20,19 +41,37 @@ export default class SearchBar extends Component {
                     </a>
                   </header>
                   <div className="card-content">
+                      <div className="field">
+                          <label className="label">City</label>
+                          <p className="control">
+                            {this.renderCityDropDown()}
+                          </p>
+                      </div>
                     <div className="field">
-                        <label className="label">Cities</label>
-                        <p className="control has-icons-left has-icons-right">
-                          <input className="input is-success" type="text" placeholder="Text input" value="bulma" />
-                          <span className="icon is-small is-left">
-                            <i className="fa fa-user"></i>
-                          </span>
-                          <span className="icon is-small is-right">
-                            <i className="fa fa-check"></i>
+                        <label className="label">Area</label>
+                        <p className="control">
+                          <span className="select is-success w100">
+                            <select className="w100">
+                              <option>Select dropdown</option>
+                              <option>With options</option>
+                            </select>
                           </span>
                         </p>
-                        <p className="help is-success">This username is available</p>
-                  </div>
+                    </div>
+
+                    <div className="separator"><span className="separator__text">OR</span></div>
+
+                    <div className="field">
+                        <label className="label">Cuisine</label>
+                        <p className="control">
+                          <span className="select is-success w100">
+                            <select className="w100">
+                              <option>Select dropdown</option>
+                              <option>With options</option>
+                            </select>
+                          </span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

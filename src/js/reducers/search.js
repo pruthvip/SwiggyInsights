@@ -2,17 +2,22 @@ import ActionConstants from '../ActionConstants';
 
 const initialState = {
     searchParam: {
-        city: null,
-        area: null,
-        cuisines: null
+        city: {},
+        area: {},
+        cuisines: {}
     },
     searchApiStatus: {
         inProgress: false,
         errors: []
-    }
+    },
+    cityApiStatus: {
+        inProgress: false,
+        errors: []
+    },
+    cityList: []
 };
 
-export default (state = initialState    , action) => {
+export default (state = initialState, action) => {
     switch (action.type) {
         case ActionConstants.UPDATE_SEARCH_API_STATUS:
             const searchApiStatus = {
@@ -23,14 +28,26 @@ export default (state = initialState    , action) => {
 
             return {
                 ...state,
-                loginApiStatus
+                searchApiStatus
             };
 
-        case ActionConstants.UPDATE_LOGGED_IN_USER:
+        case ActionConstants.UPDATE_CITY_API_STATUS:
+            const cityApiStatus = {
+                ...state.cityApiStatus,
+                inProgress: action.inProgress,
+                errors: action.errors
+            };
+
+            return {
+                ...state,
+                cityApiStatus
+            };
+
+        case ActionConstants.UPDATE_CITY_LIST:
             return {
                 ...state,
                 ...{
-                    user: action.user
+                    cityList: action.cityList
                 }
             };
 

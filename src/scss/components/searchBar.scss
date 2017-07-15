@@ -1,3 +1,31 @@
 .search-bar {
-    width: 400px;
+
+    .separator {
+        position: relative;
+        padding: 15px;
+        text-align: center;
+
+        &__text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100;
+            background-color: #fff;
+            padding: 0 10px;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            z-index: 99;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 1px;
+            left: 0;
+            width: 100%;
+            border: 1px solid #eee;
+        }
+    }
 }

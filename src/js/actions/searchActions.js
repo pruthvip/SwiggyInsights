@@ -1,32 +1,35 @@
 import ActionConstants from '../ActionConstants';
 import {SearchApi} from '../apis';
 
-function _updateLoginApi(inProgress, errors = null) {
+function _fetchCityApiStatus(inProgress, errors = null) {
     return {
-        type: ActionConstants.UPDATE_LOGIN_API_STATUS,
+        type: ActionConstants.UPDATE_CITY_API_STATUS,
         inProgress,
         errors
     };
 }
 
-function _updateUser(user) {
+
+function _fetchCityList(cityList) {
     return {
-        type: ActionConstants.UPDATE_LOGGED_IN_USER,
-        user
+        type: ActionConstants.UPDATE_CITY_LIST,
+        cityList
     };
+
 }
 
-export function login(params) {
+export function fetchCities() {
     return (dispatch) => {
-        dispatch(_updateLoginApi(true));
+        dispatch(_fetchCityApiStatus(true));
 
-        return SearchApi.login(params)
+        return SearchApi.fetchCities()
             .then(res => {
-                dispatch(_updateLoginApi(false));
-                dispatch(_updateUser(res.data));
+                console.log('fetched citires');
+                dispatch(_fetchCityApiStatus(false));
+                dispatch(_fetchCityList(res.data));
             })
             .catch(err => {
-                console.error(err);
+                dispatch(_fetchCityApiStatus(false, [err]));
             });
     };
 }
