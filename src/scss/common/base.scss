@@ -1,0 +1,26 @@
+// for mozilla number
+
+// scss-lint:disable QualifyingElement
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+body {
+    min-height: 100%;
+}
+
+
+// remove padding and list style from ul and li
+ul {
+  padding: 0;
+
+  li {
+    list-style: none;
+  }
+}

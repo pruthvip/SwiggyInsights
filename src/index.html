@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="google-signin-client_id" content="844877485865-arnidhmtd83j44ir8rks446n5bbvenn0.apps.googleusercontent.com">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Governance POC</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,700i" rel="stylesheet">
+    <script src="https://apis.google.com/js/platform.js"></script>
+    <% for (var i = 0; i < htmlWebpackPlugin.files.css.length; i++) { %>
+        <link rel="stylesheet" type="text/css" href="<%= htmlWebpackPlugin.files.css[i] %>">
+    <% } %>
+</head>
+
+<body>
+    <div id="app-root"></div>
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+        <script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+    <% } %>
+</body>
+</html>

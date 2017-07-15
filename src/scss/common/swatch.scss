@@ -1,0 +1,54 @@
+// Colors
+$primary: #2cabe3;
+$secondary-color: #49a4e1;
+$tertiary-color: #3b415e;
+
+$success-color: #7ed321;
+
+$error-color: #d85151;
+
+// 5(0) Shades Of Grey
+$primary-grey: #acacac;
+$dark-accent-grey: #595959;
+$border-color: #eee;
+
+$aside-text: #97999f;
+
+// Fonts
+// Bulma Variables override
+$family-primary: 'Rubik', sans-serif;
+
+
+// height
+$header-height: 80px;
+
+// width
+$side-nav-width: 240px;
+
+// standard box-radius
+$sz-box-radius: 2px;
+
+
+// Z-indexes
+
+
+// Screen sizes
+// 2560, 1440, 1280, 1024, 768
+$mdq-xs-max: 'max-width: 767px';
+
+$mdq-sm-min: 'min-width: 768px';
+$mdq-sm-max: 'max-width: 1023px';
+
+$mdq-md-min: 'min-width: 1024px';
+$mdq-md-max: 'max-width: 1189px';
+
+$mdq-ml-min: 'min-width: 1190px';
+$mdq-ml-max: 'max-width: 1279px';
+
+$mdq-lg-min: 'min-width: 1280px';
+$mdq-lg-max: 'max-width: 1439px';
+
+$mdq-xl-min: 'min-width: 1440px';
+$mdq-xl-max: 'max-width: 2559px';
+
+$mdq-xxl-min: 'min-width: 2560px';

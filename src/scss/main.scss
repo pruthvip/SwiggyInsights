@@ -1,0 +1,28 @@
+// Variables like colors, fonts which are used site wide
+@import './common/swatch';
+
+// Mixins like font-size(), clearfix etc
+@import './common/mixins';
+
+// Base CSS which are applied to elements directly
+@import './common/base';
+
+// Vendors
+@import './common/vendors';
+
+@import './common/bulmaOverrides';
+
+// Components
+@import './components/login';
+@import './components/aside';
+@import './components/header';
+
+// Pages
+//
+
+
+// Footer
+
+// Utilities
+// Added at the end to have higher specificity in general
+@import './common/utilities';

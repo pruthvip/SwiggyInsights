@@ -1,0 +1,54 @@
+.app-sideNav {
+  z-index: 1001;
+  position: fixed;
+  width: $side-nav-width;
+  padding-top: 0px;
+  height: 100%;
+  transition: 0.05s ease-in;
+  color: #fff;
+  background-color: #2f323e;
+  box-shadow: 1px 0px 20px rgba(0, 0, 0, .08);
+  transition: 0.05s ease-in;
+
+  &__scroll-ctn {
+    overflow: hidden;
+    height: 100%;
+  }
+
+  &__logo {
+    position: fixed;
+    top: 0;
+    width: $side-nav-width;
+    padding: 10px 20px;
+    background-color: #fff;
+    height: $header-height;
+    border: 1px solid red;
+
+    a {
+      display: flex;
+      margin: 10px 0 0 0;
+      vertical-align: middle;
+    }
+
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  &__content {
+    overflow: scroll;
+    height: 100%;
+    padding-top: $header-height;
+
+    .menu-list a {
+        color: $aside-text;
+        padding: 15px 35px 15px 20px;
+
+        &.is-active {
+          color: #fff;
+          font-weight: 500;
+        }
+    }
+  }
+}
