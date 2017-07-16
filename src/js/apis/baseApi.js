@@ -1,5 +1,7 @@
 import request from 'superagent';
 
+const appCache = {};
+
 /**
  * Base api calls
  *
@@ -18,6 +20,12 @@ export default {
     get: (url, params = {}) => {
         url = `/api/${url}`;
 
+        if (appCache[url]) {
+            return new Promise((resolve, reject) => {
+                resolve(appCache[url]);
+            })
+        }
+
         return new Promise((resolve, reject) => {
             request.get(url)
                 .set('Accept', 'application/json')
@@ -27,6 +35,7 @@ export default {
                         return reject(err.response ? err.response.body : 'Unknown API error');
                     }
 
+                    appCache[url] = res.body;
                     resolve(res.body);
                 });
         });

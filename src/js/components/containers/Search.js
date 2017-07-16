@@ -3,13 +3,26 @@ import {SearchBar, SearchResults} from '../modules/search';
 import {SearchActions} from '../../actions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import Graphs from '../modules/search/Graphs';
+
 
 class Search extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            showExtraInsights: false
+        }
+
         this.selectArea = this.selectArea.bind(this);
         this.selectCuisine = this.selectCuisine.bind(this);
+        this.fetchResults = this.fetchResults.bind(this);
+    }
+
+    showInsights() {
+        this.setState({
+            showExtraInsights: true
+        })
     }
 
     componentDidMount() {
@@ -42,6 +55,18 @@ class Search extends Component {
         );
     }
 
+
+    renderExtraInsights() {
+        return (
+            <div>
+                <Graphs
+                    resultApiStatus={this.props.resultApiStatus}
+                    areaWiseDetails={this.props.areaWiseDetails}
+                />
+            </div>
+        );
+    }
+
     render() {
         return (
             <div className="container">
@@ -63,14 +88,22 @@ class Search extends Component {
                             selectArea={this.selectArea}
                             selectCuisine={this.selectCuisine}
                             resultApiStatus={this.props.resultApiStatus}
+                            fetchResults={this.fetchResults}
                         />
                     </div>
                     <div className="column is-two-thirds">
                         <SearchResults
                             resultApiStatus={this.props.resultApiStatus}
+                            areaWiseDetails={this.props.areaWiseDetails}
+                            areaDetails={this.props.areaDetails}
+                            selectedCityId={this.props.selectedCityId}
+                            selectedAreaId={this.props.selectedAreaId}
+                            cuisineWiseReults={this.props.cuisineWiseReults}
                         />
                     </div>
                 </div>
+
+                {this.renderExtraInsights()}
             </div>
         );
     }
@@ -90,7 +123,10 @@ export default connect(
             areaListApiStatus: state.search.areaListApiStatus,
             selectedAreaId: state.search.selectedAreaId,
             selectedCuisineId: state.search.selectedCuisineId,
-            resultApiStatus: state.search.resultApiStatus
+            resultApiStatus: state.search.resultApiStatus,
+            areaWiseDetails: state.search.areaWiseDetails,
+            cuisineWiseReults: state.search.cuisineWiseReults,
+            areaDetails: state.search.areaDetails
         };
     },
     (dispatch => ({

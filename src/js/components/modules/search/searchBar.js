@@ -26,7 +26,7 @@ export default class SearchBar extends Component {
                             key={i}
                             value={city.id}
                         >
-                            {city.value}
+                            {city.name}
                         </option>
                     )
                 })}
@@ -51,7 +51,7 @@ export default class SearchBar extends Component {
 
             modifiedAreaList.unshift({
                 id: 0,
-                value: " Select Area"
+                name: " Select Area"
             });
         }
 
@@ -68,7 +68,7 @@ export default class SearchBar extends Component {
                             key={i}
                             value={area.id}
                         >
-                            {area.value}
+                            {area.name}
                         </option>
                     )
                 })}
@@ -93,7 +93,7 @@ export default class SearchBar extends Component {
 
             modifiedCuisineList.unshift({
                 id: 0,
-                value: " Select Cuisine"
+                name: " Select Cuisine"
             });
         }
 
@@ -110,13 +110,33 @@ export default class SearchBar extends Component {
                             key={i}
                             value={cuisine.id}
                         >
-                            {cuisine.value}
+                            {cuisine.name}
                         </option>
                     )
                 })}
               </select>
             </span>
         );
+    }
+
+
+    renderSubmitBtn() {
+        const submitBtnClasses = ['button', 'is-primary', 'block', 'search-bar__btn'];
+
+        if (this.props.resultApiStatus.inProgress) {
+            submitBtnClasses.push('is-loading');
+        }
+
+        return (
+            <div className="block">
+                <div
+                    className={submitBtnClasses.join(' ')}
+                    onClick={this.props.fetchResults}
+                >
+                    Search
+                </div>
+            </div>
+        )
     }
 
     render() {
@@ -157,12 +177,7 @@ export default class SearchBar extends Component {
                         </p>
                     </div>
 
-                    <div className="block">
-                        <div
-                            className="button is-primary block search-bar__btn"
-                            onClick={this.props.fetchResults}
-                        >Search</div>
-                    </div>
+                    {this.renderSubmitBtn()}
                 </div>
             </div>
         </div>

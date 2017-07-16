@@ -25,8 +25,8 @@ export function fetchCities() {
         return SearchApi.fetchCities()
             .then(res => {
                 dispatch(_fetchCityApiStatus(false));
-                dispatch(_updateCityList(res.data));
-                dispatch(fetchAreaList(res.data[0].id));
+                dispatch(_updateCityList(res));
+                dispatch(fetchAreaList(res[0].id));
             })
             .catch(err => {
                 dispatch(_fetchCityApiStatus(false, [err]));
@@ -59,7 +59,7 @@ export function fetchCuisineList() {
         return SearchApi.fetchCuisineList()
             .then(res => {
                 dispatch(_fetchCuisinesApiStatus(false));
-                dispatch(_updateCuisineList(res.data));
+                dispatch(_updateCuisineList(res));
             })
             .catch(err => {
                 dispatch(_fetchCuisinesApiStatus(false, [err]));
@@ -91,7 +91,7 @@ export function fetchAreaList(cityId = null) {
         return SearchApi.fetchAreas(cityId)
             .then(res => {
                 dispatch(_fetchAreaIdsApiStatus(false));
-                dispatch(_updateAearList(res.data));
+                dispatch(_updateAearList(res));
             })
             .catch(err => {
                 dispatch(_fetchAreaIdsApiStatus(false, [err]));
@@ -141,10 +141,26 @@ function _updateFetchResultsApi(inProgress, resultType, errors = null) {
 }
 
 
-function _updateAreaWiseResults(areaDetails) {
+function _updateAreaDetails(areaDetails) {
     return {
         type: ActionConstants.UPDATE_AREA_DETAILS,
         areaDetails
+    }
+}
+
+
+function _updateAreaWiseResults(areaWiseDetails) {
+    return {
+        type: ActionConstants.UPDATE_AREA_WISE_DETAILS,
+        areaWiseDetails
+    }
+}
+
+
+function _updateCuisineWiseResults(cuisineWiseReults) {
+    return {
+        type: ActionConstants.UPDATE_CUISINE_WISE_DETAILS,
+        cuisineWiseReults
     }
 }
 
@@ -169,15 +185,43 @@ export function fetchResults(cityId, areaId, cuisineId) {
 
             return Promise.all(promiseArray)
                 .then(res => {
-                    dispatch(_updateFetchResultsApi(false));
-                    dispatch(_updateAreaWiseResults(res[1].data));
-                    dispatch(_updateAreaDetails(areaId, res[0].data));
-                })
+                    dispatch(_updateAreaWiseResults(res[1]));
+
+                    const areaDetails = {};
+                    areaDetails[areaId] = res[0];
+                    dispatch(_updateAreaDetails(areaDetails));
+                    dispatch(_updateFetchResultsApi(false, 1));
+                });
         }
 
         if (cuisineId) {
             dispatch(_updateFetchResultsApi(true, 2));
 
+            const promiseArray = [];
+
+            return SearchApi.fetchCuisineWiseDetails(cityId, cuisineId)
+                .then(res => {
+                    const areaIds = res.areas;
+
+                    const areaDetailsPromises = [];
+
+                    areaIds.forEach(area => {
+                        areaDetailsPromises.push(SearchApi.fetchAreaDetails(area.id));
+                    });
+
+                    const areaDetailsJSON = {}
+
+                    Promise.all(areaDetailsPromises)
+                        .then(areaDetail => {
+                            areaDetail.forEach(a => {
+                                areaDetailsJSON[a.id] = a;
+                            })
+
+                            dispatch(_updateAreaDetails(areaDetailsJSON));
+                            dispatch(_updateCuisineWiseResults(res));
+                            dispatch(_updateFetchResultsApi(false, 2));
+                        });
+                });
         }
     }
 }

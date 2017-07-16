@@ -24,11 +24,11 @@ const initialState = {
     },
     resultApiStatus: {
         inProgress: false,
-        resultType: 0
+        resultType: 0,
         errors: []
     },
-    areaResults: null,
-    cuisineReults: null,
+    areaWiseDetails: null,
+    cuisineWiseReults: null,
     cityList: [],
     areaDetails: {},
     areaList: [],
@@ -96,6 +96,11 @@ export default (state = initialState, action) => {
                 resultType: action.resultType
             };
 
+            let removeOldData = {
+                areaWiseDetails: state.areaWiseDetails,
+                cuisineWiseReults: state.cuisineWiseReults
+            };
+
             return {
                 ...state,
                 resultApiStatus
@@ -139,6 +144,32 @@ export default (state = initialState, action) => {
                 ...state,
                 ...{
                     selectedAreaId: action.selectedAreaId
+                }
+            };
+
+        case ActionConstants.UPDATE_AREA_DETAILS:
+            console.log('area', action);
+            return {
+                ...state,
+                ...{
+                    areaDetails: action.areaDetails
+                }
+            };
+
+        case ActionConstants.UPDATE_CUISINE_WISE_DETAILS:
+            return {
+                ...state,
+                ...{
+                    cuisineWiseReults: action.cuisineWiseReults
+                }
+            };
+
+
+        case ActionConstants.UPDATE_AREA_WISE_DETAILS:
+            return {
+                ...state,
+                ...{
+                    areaWiseDetails: action.areaWiseDetails
                 }
             };
 

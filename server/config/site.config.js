@@ -7,7 +7,7 @@ const config = {
             },
             governance: {
                 https_enabled: false,
-                host: '54.255.196.97:8001'
+                host: '172.16.120.73:8092'
             },
             governanceLogging: {
                 https_enabled: false,
